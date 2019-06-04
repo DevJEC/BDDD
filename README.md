@@ -9,3 +9,71 @@ CONTENIDO TOMADO DE:
 
 
 [Informe proyecto BDDD](https://drive.google.com/drive/folders/1XI_63xHAIQPeJnq_48AHhJsdpdzCzHwx?usp=sharing)
+
+
+# CONTENIDO
+  Tema proyecto.
+  Objetivos del proyecto.
+  Descripción del proyecto.
+  Modelo Entidad Relación.
+  Conclusiones.
+
+# TEMA PROYECTO
+
+BASE DE DATOS DE EMPRESA DE SOLUCIONES INFORMÁTICAS.
+
+
+# OBJETIVOS
+
+
+1.    Desarrollar una base de datos que permita presentar información detallada acerca de cada proyecto que lleva a cabo la empresa. Incluye información como: El servicio que se prestara en dicho proyecto, cliente que solicito el proyecto, empleados que están a cargo del proyecto.
+ 
+2.    Implementar los conceptos a cerca de bases de datos distribuidas para poder afrontar el caso de las dos sucursales planteadas como problema.
+ 
+3.    Representar dicha base de datos en dos modelos bien conocidos para una mejor comprensión de lo que se va a realizar, comprendiendo sus partes como relaciones entre las mismas.
+ 
+4.    Familiarizarse con las nuevas herramientas que nos facilitarán la creación de los modelos de base de datos a realizar.
+
+
+
+
+## DESCRIPCIÓN 
+
+La empresa ACP Solutions posee dos sucursales una en la ciudad de Quito y la segunda ubicada en la ciudad de Cuenca. Se desea crear una base de datos distribuida para gestionar la información de clientes, empleados  y proyectos, así como los servicios vinculados a cada proyecto.
+Se puede definir las siguientes especificaciones en cuanto al escenario:
+ 
+*  Cada cliente puede solicitar uno o varios proyectos, mientras que cada proyecto pertenece a un solo cliente.
+ 
+*  Cada proyecto  requiere de un servicio que va ser brindado, y un servicio en concreto puede ser requerido por varios proyectos.
+*   Un proyecto puede asignarse a varios empleados, y cada empleado trabaja en un proyecto específico.
+ 
+*   Un empleado puede tener una relación de jerarquía superior sobre otros empleados.
+
+
+#  MODELO ENTIDAD RELACIÓN Y ESPECIFICACIONES DE LA BASE
+
+
+Los constraint implementados en nuestra base datos con la clave primaria con valor único.
+
+## Diagrama Entidad Relación
+
+![image](https://user-images.githubusercontent.com/50051312/58879802-1fea9c00-869c-11e9-98fb-932cc7f0a850.png)
+
+## UML Modelo Entidad Relación
+
+![image](https://user-images.githubusercontent.com/50051312/58879918-5cb69300-869c-11e9-955d-7fe15e102c32.png)
+
+     
+Fig 1. Muestra el modelo entidad relación de la base de datos para la gestión de proyectos.
+
+
+
+
+#  CONCLUSIONES
+
+* Se logró plantear el problema a solucionar con la base de datos
+* Se completo el diagrama modelo entidad relación a ejecutarse en el proyecto de implementación.
+* Se plantea la solución por fragmentación para el segundo bimestre
+* Como principales constraint el uso de primary y foreing key son los más utilizados para establecer cada relación de todas nuestras
+entidades de la base de datos.
+
