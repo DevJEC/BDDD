@@ -72,7 +72,8 @@ Los constraint implementados en nuestra base datos con la clave primaria con val
 
 ## UML Modelo Entidad Relación
 
-![image](https://user-images.githubusercontent.com/50051312/58879918-5cb69300-869c-11e9-955d-7fe15e102c32.png)
+![image](https://user-images.githubusercontent.com/50051312/58880910-a3a58800-869e-11e9-821b-03b4d4f50ce8.png)
+
 
      
 Fig 1. Muestra el modelo entidad relación de la base de datos para la gestión de proyectos.
