@@ -8,4 +8,4 @@ CONTENIDO TOMADO DE:
 [redes](http://chennaicisco.blogspot.com/2013/02/configure-igrp-in-routers-to-enable.html)
 
 
-[Informe proyecto BDDD](https://drive.google.com/open?id=1XI_63xHAIQPeJnq_48AHhJsdpdzCzHwx)
+[Informe proyecto BDDD](https://drive.google.com/drive/folders/1XI_63xHAIQPeJnq_48AHhJsdpdzCzHwx?usp=sharing)
