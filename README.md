@@ -68,7 +68,7 @@ Los constraint implementados en nuestra base datos con la clave primaria con val
 
 ## Diagrama Entidad Relación
 
-![image](https://user-images.githubusercontent.com/50051312/58879802-1fea9c00-869c-11e9-98fb-932cc7f0a850.png)
+![image](https://user-images.githubusercontent.com/50051312/58880499-9fc53600-869d-11e9-87ff-cbc3e8b9221c.png)
 
 ## UML Modelo Entidad Relación
 
