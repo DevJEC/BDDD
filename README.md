@@ -12,16 +12,25 @@ CONTENIDO TOMADO DE:
 
 
 # CONTENIDO
-  Tema proyecto.
-  Objetivos del proyecto.
-  Descripción del proyecto.
-  Modelo Entidad Relación.
-  Conclusiones.
+
+[Tema proyecto.](#id1)
+
+[Objetivos del proyecto.](#id2)
+
+  [Descripción del proyecto.](#id3)
+  [Modelo Entidad Relación.](#id4)
+  
+   [Conclusiones.](#id2)](#id5)
+  
+
+<a name="id1"></a>
 
 # TEMA PROYECTO
 
 BASE DE DATOS DE EMPRESA DE SOLUCIONES INFORMÁTICAS.
 
+
+<a name="id2"></a>
 
 # OBJETIVOS
 
@@ -35,7 +44,7 @@ BASE DE DATOS DE EMPRESA DE SOLUCIONES INFORMÁTICAS.
 4.    Familiarizarse con las nuevas herramientas que nos facilitarán la creación de los modelos de base de datos a realizar.
 
 
-
+<a name="id3"></a>
 
 ## DESCRIPCIÓN 
 
@@ -49,6 +58,7 @@ Se puede definir las siguientes especificaciones en cuanto al escenario:
  
 *   Un empleado puede tener una relación de jerarquía superior sobre otros empleados.
 
+<a name="id4"></a>
 
 #  MODELO ENTIDAD RELACIÓN Y ESPECIFICACIONES DE LA BASE
 
@@ -68,7 +78,7 @@ Fig 1. Muestra el modelo entidad relación de la base de datos para la gestión 
 
 
 
-
+<a name="id5"></a>
 #  CONCLUSIONES
 
 * Se logró plantear el problema a solucionar con la base de datos
