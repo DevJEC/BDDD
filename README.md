@@ -20,7 +20,7 @@ CONTENIDO TOMADO DE:
   [Descripción del proyecto.](#id3)
   [Modelo Entidad Relación.](#id4)
   
-   [Conclusiones.](#id2)](#id5)
+   [Conclusiones.](#id5)
   
 
 <a name="id1"></a>
