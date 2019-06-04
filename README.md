@@ -13,14 +13,15 @@ CONTENIDO TOMADO DE:
 
 # CONTENIDO
 
-[Tema proyecto.](#id1)
+* [Tema proyecto.](#id1)
 
-[Objetivos del proyecto.](#id2)
+* [Objetivos del proyecto.](#id2)
 
-  [Descripción del proyecto.](#id3)
-  [Modelo Entidad Relación.](#id4)
-  
-   [Conclusiones.](#id5)
+* [Descripción del proyecto.](#id3)
+
+* [Modelo Entidad Relación.](#id4)
+
+* [Conclusiones.](#id5)
   
 
 <a name="id1"></a>
