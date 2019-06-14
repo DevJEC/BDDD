@@ -16,6 +16,7 @@ CONTENIDO TOMADO DE:
 [capturas practica 3](https://docs.google.com/document/d/1jx48QMMA6el_J53kBXjxH0utqqkv6NaY8VpxOGYKR5E/edit?usp=sharing)
 
 [capturas practica 5](https://docs.google.com/document/d/1keQgY2U0vRRBPnTWSPhk622RderoMbeb3FAtLRWEfnM/edit?usp=sharing)
+
 [captura pratica 6](https://drive.google.com/open?id=1szGD76vJcB7aY4s-acaPf8v7i9dT0HL08-aqV04nFII)
 
 
