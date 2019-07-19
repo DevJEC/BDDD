@@ -92,6 +92,15 @@ Fig 1. Muestra el modelo entidad relación de la base de datos para la gestión 
 
 <a name="id5"></a>
 # Esquema de Fragmentación– Replicación
+  ## Roles
+  
+  Las sedes están en dos ciudades, Quito y Cuenca.
+En cada sede se realizarán proyectos concernientes a desarrollo de software, se gestionara la nómina de los empleados de dicha sede y los clientes de dicha sede.
+
+La Sede en la ciudad de Quito se encargará de los proyectos de Desarrollo Web y la sede en Cuenca se encarga de los proyectos de Desarrollo Móvil.
+
+  
+  ## Fragmentación– Replicación
 
 ###	TABLA SEDE 
 
@@ -120,9 +129,20 @@ La –TABLA EMPLEADO- se fragmenta en función de cada proyecto.
 
 ### TABLA CLIENTE
 Fragmentación Horizontal Derivada, en función de PROYECTO i
-La –TABLA CLIENTE- se fragmenta en función del PROYECTO i; ya los clientes solicitan un proyecto que está en una respectiva SEDE que atienda una área. 
+La –TABLA CLIENTE- se fragmenta en función del PROYECTO i; ya los clientes solicitan un proyecto que está en una respectiva SEDE que atienda una área.  
 
 ![image](https://user-images.githubusercontent.com/50051312/61537481-e7f5a900-a9fc-11e9-8eb7-1b3fdc2b0b65.png)
+
+
+  ## Esquema asignación
+  
+| ESQUEMA DE ASIGNACIÓN |            |            |            |            |
+|:---------------------:|------------|------------|------------|------------|
+| **SEDE**                | SEDE       |            | SEDE       |            |
+| **PROYECTO**             | PROYECTO 1 |            | PROYECTO 2 |            |
+| **EMPLEADO**              | EMPLEADO 1 | EMPLEADO 2 | EMPLEADO 1 | EMPLEADO 2 |
+| **SERVICIO**              | SERVICIO   |            | SERVICIO   |            |
+| **CLIENTE**               | CLIENTE    |            | CLIENTE    |            |
 
 <a name="id6"></a>
 #  CONCLUSIONES
