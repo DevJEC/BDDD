@@ -30,7 +30,10 @@ CONTENIDO TOMADO DE:
 
 * [Modelo Entidad Relación.](#id4)
 
-* [Conclusiones.](#id5)
+* [Esquema de fragmentación y replicacion.](#id5)
+
+* [Conclusiones.](#id6)
+
   
 
 <a name="id1"></a>
@@ -87,9 +90,41 @@ Los constraint implementados en nuestra base datos con la clave primaria con val
      
 Fig 1. Muestra el modelo entidad relación de la base de datos para la gestión de proyectos.
 
-
-
 <a name="id5"></a>
+# Esquema de Fragmentación– Replicación
+
+###	TABLA SEDE 
+
+La –TABLA SEDE- se replica; ya que no es muy dinámica. Es poco probable que se inaugure otra sede.
+
+SEDE -> se replica
+
+### TABLA PROYECTO
+Fragmentación Horizontal Primaria
+La –TABLA PROYECTO- se fragmenta en función de la SEDE.
+
+![image](https://user-images.githubusercontent.com/50051312/61537357-9816e200-a9fc-11e9-8794-9fe4cf97b577.png)
+
+### TABLA SERVICIO
+Replicada
+La –TABLA SERVICIO- se replica ya que diferentes proyectos en diferentes sedes pueden realizar el mismo SERVICIO.
+
+SERVICIO -> se replica
+
+
+### TABLA EMPLEADO
+Fragmentación Horizontal Derivada,  en función de PROYECTO i
+La –TABLA EMPLEADO- se fragmenta en función de cada proyecto.
+
+![image](https://user-images.githubusercontent.com/50051312/61537450-d2807f00-a9fc-11e9-9d0d-d74d57f4b832.png)
+
+### TABLA CLIENTE
+Fragmentación Horizontal Derivada, en función de PROYECTO i
+La –TABLA CLIENTE- se fragmenta en función del PROYECTO i; ya los clientes solicitan un proyecto que está en una respectiva SEDE que atienda una área. 
+
+![image](https://user-images.githubusercontent.com/50051312/61537481-e7f5a900-a9fc-11e9-8eb7-1b3fdc2b0b65.png)
+
+<a name="id6"></a>
 #  CONCLUSIONES
 
 * Se logró plantear el problema a solucionar con la base de datos
