@@ -32,7 +32,9 @@ CONTENIDO TOMADO DE:
 
 * [Esquema de fragmentación y replicacion.](#id5)
 
-* [Conclusiones.](#id6)
+* [Script.](#id6)
+
+* [Conclusiones.](#id7)
 
   
 
@@ -145,6 +147,164 @@ La –TABLA CLIENTE- se fragmenta en función del PROYECTO i; ya los clientes so
 | **CLIENTE**               | CLIENTE    |            | CLIENTE    |            |
 
 <a name="id6"></a>
+# SCRIPT
+
+**Crear base**
+``` type:javascript
+
+CREATE DATABASE  `proyecto1`
+ALTER SESSION SET CURRENT_SCHEMA = proyecto1;
+
+```
+**Tabla asignación**
+
+``` type:javascript
+BEGIN
+   EXECUTE IMMEDIATE 'DROP TABLE asignacion';
+EXCEPTION
+   WHEN OTHERS THEN NULL;
+END;
+/
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `asignacion` (
+  Servicio_idServicio number(10) NOT NULL,
+  Proyecto_idProyecto number(10) NOT NULL,
+  PRIMARY KEY (Servicio_idServicio,Proyecto_idProyecto)
+  CREATE INDEX fk_Servicio_has_Proyecto_Proyecto1_idx ON `asignacion` (Proyecto_idProyecto)
+  CREATE INDEX fk_Servicio_has_Proyecto_Servicio1_idx ON `asignacion` (Servicio_idServicio),
+  CONSTRAINT fk_Servicio_has_Proyecto_Proyecto1 FOREIGN KEY (Proyecto_idProyecto) REFERENCES `proyecto` (idProyecto),
+  CONSTRAINT fk_Servicio_has_Proyecto_Servicio1 FOREIGN KEY (Servicio_idServicio) REFERENCES `servicio` (idServicio)
+); ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+```
+
+
+**Tabla cliente**
+
+``` type:javascript
+BEGIN
+   EXECUTE IMMEDIATE 'DROP TABLE cliente';
+EXCEPTION
+   WHEN OTHERS THEN NULL;
+END;
+/
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cliente` (
+  idCliente number(10) NOT NULL,
+  nombreCliente varchar2(45) NOT NULL,
+  apellidoCliente varchar2(45) NOT NULL,
+  direccionCliente varchar2(45) NOT NULL,
+  PRIMARY KEY (idCliente)
+); ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+```
+
+**Tabla emppleado**
+
+``` type:javascript
+BEGIN
+   EXECUTE IMMEDIATE 'DROP TABLE empleado';
+EXCEPTION
+   WHEN OTHERS THEN NULL;
+END;
+/
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `empleado` (
+  idEmpleado number(10) NOT NULL,
+  nombreEmpleado varchar2(45) NOT NULL,
+  apellidoEmpleado varchar2(45) NOT NULL,
+  sueldoEmpleado number(7,2) NOT NULL,
+  Empleado_idEmpleado number(10) DEFAULT NULL,
+  Proyecto_idProyecto number(10) DEFAULT NULL,
+  PRIMARY KEY (idEmpleado)
+  CREATE INDEX fk_Empleado_Empleado1_idx ON `empleado` (Empleado_idEmpleado)
+  CREATE INDEX fk_Empleado_Proyecto1_idx ON `empleado` (Proyecto_idProyecto),
+  CONSTRAINT fk_Empleado_Empleado1 FOREIGN KEY (Empleado_idEmpleado) REFERENCES `empleado` (idEmpleado),
+  CONSTRAINT fk_Empleado_Proyecto1 FOREIGN KEY (Proyecto_idProyecto) REFERENCES `proyecto` (idProyecto)
+); ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+```
+
+**tabla proyecto**
+
+
+``` type:javascript
+BEGIN
+   EXECUTE IMMEDIATE 'DROP TABLE proyecto';
+EXCEPTION
+   WHEN OTHERS THEN NULL;
+END;
+/
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `proyecto` (
+  idProyecto number(10) NOT NULL,
+  nombreProyecto varchar2(45) NOT NULL,
+  estadoProyecto varchar2(45) NOT NULL,
+  fechaSolicitudProyecto date NOT NULL,
+  fechaEntregaProyecto date NOT NULL,
+  Sede_idSede number(10) NOT NULL,
+  Cliente_idCliente number(10) NOT NULL,
+  PRIMARY KEY (idProyecto)
+  CREATE INDEX fk_Proyecto_Sede1_idx ON `proyecto` (Sede_idSede)
+  CREATE INDEX fk_Proyecto_Cliente1_idx ON `proyecto` (Cliente_idCliente),
+  CONSTRAINT fk_Proyecto_Cliente1 FOREIGN KEY (Cliente_idCliente) REFERENCES `cliente` (idCliente),
+  CONSTRAINT fk_Proyecto_Sede1 FOREIGN KEY (Sede_idSede) REFERENCES `sede` (idSede)
+); ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+```
+
+**sede**
+
+``` type: javascript
+BEGIN
+   EXECUTE IMMEDIATE 'DROP TABLE sede';
+EXCEPTION
+   WHEN OTHERS THEN NULL;
+END;
+/
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sede` (
+  idSede number(10) NOT NULL,
+  ciudadSede varchar2(45) NOT NULL,
+  PRIMARY KEY (idSede)
+); ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+```
+
+
+**tabla servicio**
+``` type:javascript
+BEGIN
+   EXECUTE IMMEDIATE 'DROP TABLE servicio';
+EXCEPTION
+   WHEN OTHERS THEN NULL;
+END;
+/
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `servicio` (
+  idServicio number(10) NOT NULL,
+  temaServicio varchar2(45) NOT NULL,
+  precioServicio number(8,2) NOT NULL,
+  descripcionServicio varchar2(45) NOT NULL,
+  PRIMARY KEY (idServicio)
+); ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+```
+
+
+  
+<a name="id7"></a>
 #  CONCLUSIONES
 
 * Se logró plantear el problema a solucionar con la base de datos
