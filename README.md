@@ -149,156 +149,173 @@ La –TABLA CLIENTE- se fragmenta en función del PROYECTO i; ya los clientes so
 <a name="id6"></a>
 # SCRIPT
 
-**Crear base**
 ``` type:javascript
 
-CREATE DATABASE  `proyecto1`
-ALTER SESSION SET CURRENT_SCHEMA = proyecto1;
-
-```
-**Tabla asignación**
-
-``` type:javascript
-BEGIN
-   EXECUTE IMMEDIATE 'DROP TABLE asignacion';
-EXCEPTION
-   WHEN OTHERS THEN NULL;
-END;
-/
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `asignacion` (
-  Servicio_idServicio number(10) NOT NULL,
-  Proyecto_idProyecto number(10) NOT NULL,
-  PRIMARY KEY (Servicio_idServicio,Proyecto_idProyecto)
-  CREATE INDEX fk_Servicio_has_Proyecto_Proyecto1_idx ON `asignacion` (Proyecto_idProyecto)
-  CREATE INDEX fk_Servicio_has_Proyecto_Servicio1_idx ON `asignacion` (Servicio_idServicio),
-  CONSTRAINT fk_Servicio_has_Proyecto_Proyecto1 FOREIGN KEY (Proyecto_idProyecto) REFERENCES `proyecto` (idProyecto),
-  CONSTRAINT fk_Servicio_has_Proyecto_Servicio1 FOREIGN KEY (Servicio_idServicio) REFERENCES `servicio` (idServicio)
-); ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
-```
+ /*==============================================================*/
+/* DBMS name:      ORACLE Version 10g                           */
+/* Created on:     24/7/2019 12:23:57                           */
+/*==============================================================*/
 
 
-**Tabla cliente**
+alter table ASIGNACION
+   drop constraint FK_ASIGNACI_FK_PROYEC_PROYECTO;
 
-``` type:javascript
-BEGIN
-   EXECUTE IMMEDIATE 'DROP TABLE cliente';
-EXCEPTION
-   WHEN OTHERS THEN NULL;
-END;
-/
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `cliente` (
-  idCliente number(10) NOT NULL,
-  nombreCliente varchar2(45) NOT NULL,
-  apellidoCliente varchar2(45) NOT NULL,
-  direccionCliente varchar2(45) NOT NULL,
-  PRIMARY KEY (idCliente)
-); ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+alter table ASIGNACION
+   drop constraint FK_ASIGNACI_FK_SERVIC_SERVICIO;
 
-```
+alter table EMPLEADO
+   drop constraint FK_EMPLEADO_FK_PROYEC_PROYECTO;
 
-**Tabla emppleado**
+alter table PROYECTO
+   drop constraint FK_PROYECTO_FK_CLIENT_CLIENTE;
 
-``` type:javascript
-BEGIN
-   EXECUTE IMMEDIATE 'DROP TABLE empleado';
-EXCEPTION
-   WHEN OTHERS THEN NULL;
-END;
-/
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `empleado` (
-  idEmpleado number(10) NOT NULL,
-  nombreEmpleado varchar2(45) NOT NULL,
-  apellidoEmpleado varchar2(45) NOT NULL,
-  sueldoEmpleado number(7,2) NOT NULL,
-  Empleado_idEmpleado number(10) DEFAULT NULL,
-  Proyecto_idProyecto number(10) DEFAULT NULL,
-  PRIMARY KEY (idEmpleado)
-  CREATE INDEX fk_Empleado_Empleado1_idx ON `empleado` (Empleado_idEmpleado)
-  CREATE INDEX fk_Empleado_Proyecto1_idx ON `empleado` (Proyecto_idProyecto),
-  CONSTRAINT fk_Empleado_Empleado1 FOREIGN KEY (Empleado_idEmpleado) REFERENCES `empleado` (idEmpleado),
-  CONSTRAINT fk_Empleado_Proyecto1 FOREIGN KEY (Proyecto_idProyecto) REFERENCES `proyecto` (idProyecto)
-); ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+alter table PROYECTO
+   drop constraint FK_PROYECTO_FK_SEDE_SEDE;
 
-```
+drop index FK_SERVICIO_FK;
 
-**tabla proyecto**
+drop index FK_PROYECTOASIG_FK;
+
+drop table ASIGNACION cascade constraints;
+
+drop table CLIENTE cascade constraints;
+
+drop index FK_PROYECTO_FK;
+
+drop table EMPLEADO cascade constraints;
+
+drop index FK_SEDE_FK;
+
+drop index FK_CLIENTE_FK;
+
+drop table PROYECTO cascade constraints;
+
+drop table SEDE cascade constraints;
+
+drop table SERVICIO cascade constraints;
+
+/*==============================================================*/
+/* Table: ASIGNACION                                            */
+/*==============================================================*/
+create table ASIGNACION  (
+   ASINGNACIONID        NUMBER(8)                       not null,
+   PROYECTOID           NUMBER(8)                       not null,
+   SERIVCIOID           NUMBER(8)                       not null,
+   constraint PK_ASIGNACION primary key (ASINGNACIONID)
+);
+
+/*==============================================================*/
+/* Index: FK_PROYECTOASIG_FK                                    */
+/*==============================================================*/
+create index FK_PROYECTOASIG_FK on ASIGNACION (
+   PROYECTOID ASC
+);
+
+/*==============================================================*/
+/* Index: FK_SERVICIO_FK                                        */
+/*==============================================================*/
+create index FK_SERVICIO_FK on ASIGNACION (
+   SERIVCIOID ASC
+);
+
+/*==============================================================*/
+/* Table: CLIENTE                                               */
+/*==============================================================*/
+create table CLIENTE  (
+   CLIENTEID            NUMBER(8)                       not null,
+   CLI_NOMBRE           VARCHAR2(30),
+   CLI_APELLIDO         VARCHAR2(30),
+   DIRECCION            VARCHAR2(30),
+   constraint PK_CLIENTE primary key (CLIENTEID)
+);
+
+/*==============================================================*/
+/* Table: EMPLEADO                                              */
+/*==============================================================*/
+create table EMPLEADO  (
+   EMPLEADOID           NUMBER(8)                       not null,
+   PROYECTOID           NUMBER(8)                       not null,
+   EM_NOMBRE            VARCHAR2(30),
+   EM_APELLIDO          VARCHAR2(30),
+   SUELDO_EM            NUMBER(8),
+   constraint PK_EMPLEADO primary key (EMPLEADOID)
+);
+
+/*==============================================================*/
+/* Index: FK_PROYECTO_FK                                        */
+/*==============================================================*/
+create index FK_PROYECTO_FK on EMPLEADO (
+   PROYECTOID ASC
+);
+
+/*==============================================================*/
+/* Table: PROYECTO                                              */
+/*==============================================================*/
+create table PROYECTO  (
+   PROYECTOID           NUMBER(8)                       not null,
+   CLIENTEID            NUMBER(8)                       not null,
+   SEDEID               NUMBER(8)                       not null,
+   PROI_NOMBRE          VARCHAR2(30),
+   ESTADO               RAW(2),
+   FECHA_ENTREGA        DATE,
+   constraint PK_PROYECTO primary key (PROYECTOID)
+);
+
+/*==============================================================*/
+/* Index: FK_CLIENTE_FK                                         */
+/*==============================================================*/
+create index FK_CLIENTE_FK on PROYECTO (
+   CLIENTEID ASC
+);
+
+/*==============================================================*/
+/* Index: FK_SEDE_FK                                            */
+/*==============================================================*/
+create index FK_SEDE_FK on PROYECTO (
+   SEDEID ASC
+);
+
+/*==============================================================*/
+/* Table: SEDE                                                  */
+/*==============================================================*/
+create table SEDE  (
+   SEDEID               NUMBER(8)                       not null,
+   CIUDAD               VARCHAR2(30),
+   constraint PK_SEDE primary key (SEDEID)
+);
+
+/*==============================================================*/
+/* Table: SERVICIO                                              */
+/*==============================================================*/
+create table SERVICIO  (
+   SERIVCIOID           NUMBER(8)                       not null,
+   TEMA                 VARCHAR2(30),
+   PRECIO               NUMBER(8),
+   DESCRIPCION          VARCHAR2(30),
+   constraint PK_SERVICIO primary key (SERIVCIOID)
+);
+
+alter table ASIGNACION
+   add constraint FK_ASIGNACI_FK_PROYEC_PROYECTO foreign key (PROYECTOID)
+      references PROYECTO (PROYECTOID);
+
+alter table ASIGNACION
+   add constraint FK_ASIGNACI_FK_SERVIC_SERVICIO foreign key (SERIVCIOID)
+      references SERVICIO (SERIVCIOID);
+
+alter table EMPLEADO
+   add constraint FK_EMPLEADO_FK_PROYEC_PROYECTO foreign key (PROYECTOID)
+      references PROYECTO (PROYECTOID);
+
+alter table PROYECTO
+   add constraint FK_PROYECTO_FK_CLIENT_CLIENTE foreign key (CLIENTEID)
+      references CLIENTE (CLIENTEID);
+
+alter table PROYECTO
+   add constraint FK_PROYECTO_FK_SEDE_SEDE foreign key (SEDEID)
+      references SEDE (SEDEID);
 
 
-``` type:javascript
-BEGIN
-   EXECUTE IMMEDIATE 'DROP TABLE proyecto';
-EXCEPTION
-   WHEN OTHERS THEN NULL;
-END;
-/
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `proyecto` (
-  idProyecto number(10) NOT NULL,
-  nombreProyecto varchar2(45) NOT NULL,
-  estadoProyecto varchar2(45) NOT NULL,
-  fechaSolicitudProyecto date NOT NULL,
-  fechaEntregaProyecto date NOT NULL,
-  Sede_idSede number(10) NOT NULL,
-  Cliente_idCliente number(10) NOT NULL,
-  PRIMARY KEY (idProyecto)
-  CREATE INDEX fk_Proyecto_Sede1_idx ON `proyecto` (Sede_idSede)
-  CREATE INDEX fk_Proyecto_Cliente1_idx ON `proyecto` (Cliente_idCliente),
-  CONSTRAINT fk_Proyecto_Cliente1 FOREIGN KEY (Cliente_idCliente) REFERENCES `cliente` (idCliente),
-  CONSTRAINT fk_Proyecto_Sede1 FOREIGN KEY (Sede_idSede) REFERENCES `sede` (idSede)
-); ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
-```
-
-**sede**
-
-``` type: javascript
-BEGIN
-   EXECUTE IMMEDIATE 'DROP TABLE sede';
-EXCEPTION
-   WHEN OTHERS THEN NULL;
-END;
-/
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `sede` (
-  idSede number(10) NOT NULL,
-  ciudadSede varchar2(45) NOT NULL,
-  PRIMARY KEY (idSede)
-); ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-```
-
-
-**tabla servicio**
-``` type:javascript
-BEGIN
-   EXECUTE IMMEDIATE 'DROP TABLE servicio';
-EXCEPTION
-   WHEN OTHERS THEN NULL;
-END;
-/
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `servicio` (
-  idServicio number(10) NOT NULL,
-  temaServicio varchar2(45) NOT NULL,
-  precioServicio number(8,2) NOT NULL,
-  descripcionServicio varchar2(45) NOT NULL,
-  PRIMARY KEY (idServicio)
-); ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 ```
 
