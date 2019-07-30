@@ -1,0 +1,141 @@
+start C:\Users\oracle-2\Downloads\BDDD-master\BDDD-master\PEDIDOS.sql
+
+
+
+create database link baseremota
+connect to proyecto1 identified by pass1234
+using 
+'(description=
+(address_list=
+(address=(protocol=tcp)(host=192.168.4.4)(port=1521))
+)
+(connect_data=
+(service_name=base1)
+)
+)';
+
+
+
+create or replace trigger t_sede
+after insert on sede
+for each row
+declare
+cursor c1 is
+select 1 from sede@baseremota
+where SEDEID = :new.SEDEID;
+x c1%rowtype;
+begin
+open c1;
+fetch c1 into x;
+if c1%notfound then
+insert into sede@baseremota
+values
+(:new.SEDEID, :new.CIUDAD);
+close c1;
+end if;
+end;
+.
+/
+
+
+insert into sede values
+('0001','Quito');
+
+insert into sede@baseremota values
+('0002','Cuenca');
+
+
+insert into servicio values
+(3,'blog web',20,'blog empreasarial');
+
+insert into servicio@baseremota values
+(4,'app movil',1000,'juego interactivo');
+
+
+
+
+
+
+/*objeto*/
+CREATE OR REPLACE TYPE proy AS OBJECT
+  (PROYECTOID           NUMBER(8),
+   CLIENTEID            NUMBER(8),
+   SEDEID               NUMBER(8),
+   PROI_NOMBRE          VARCHAR2(30),
+   ESTADO               RAW(2),
+   FECHA_ENTREGA        DATE);
+.
+/
+
+
+/*vista*/
+
+CREATE VIEW all_projects (proy)
+AS
+SELECT proy (PROYECTOID, CLIENTEID, SEDEID,PROI_NOMBRE,ESTADO,FECHA_ENTREGA)
+FROM proyecto@baseremota
+UNION ALL
+SELECT proy (PROYECTOID, CLIENTEID, SEDEID,PROI_NOMBRE,ESTADO,FECHA_ENTREGA)
+FROM proyecto;
+
+
+/*trigger*/
+CREATE OR REPLACE TRIGGER T_PROY
+INSTEAD OF INSERT ON all_projects
+FOR EACH ROW
+BEGIN
+IF (:NEW.proy.sedeid != 0002) THEN
+INSERT INTO proyecto VALUES
+(:NEW.proy.PROYECTOID, :NEW.proy.CLIENTEID, :NEW.proy.SEDEID,
+:NEW.proy.PROI_NOMBRE,:NEW.proy.ESTADO,
+:NEW.proy.FECHA_ENTREGA );
+ELSE
+INSERT INTO proyecto@baseremota VALUES
+(:NEW.proy.PROYECTOID, :NEW.proy.CLIENTEID, :NEW.proy.SEDEID,
+:NEW.proy.PROI_NOMBRE,:NEW.proy.ESTADO,
+:NEW.proy.FECHA_ENTREGA );
+END IF;
+END;
+.
+/
+
+
+
+
+INSERT INTO all_projects VALUES
+(proy (0003,002,0002, 'aplicacion movil ios','01',
+TO_DATE('2019/09/10', 'yyyy/mm/dd')));
+
+Insert into cliente values
+(001,'Roberto','Andrade','Naciones Unidads y Gregorio');
+
+
+
+insert into proyecto@baseremota values
+(0003,002,0002, 'aplicacion movil ios','01',
+TO_DATE('2019/09/10', 'yyyy/mm/dd'));
+
+
+
+select * from gv$session where username='proyecto2';
+
+
+
+insert into sede values
+('0003','Ambato');
+
+insert into sede@baseremota values
+('0002','Cuenca');
+
+
+insert into servicio values
+(3,'blog web',20,'blog empreasarial');
+
+insert into servicio@baseremota values
+(4,'app movil',1000,'juego interactivo');
+
+
+
+INSERT INTO all_projects VALUES
+(proy (5,002,0002, 'aplicacion empresarial','01',
+TO_DATE('2019/09/10', 'yyyy/mm/dd')));
