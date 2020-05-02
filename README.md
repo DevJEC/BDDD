@@ -19,6 +19,10 @@ CONTENIDO TOMADO DE:
 
 [captura pratica 6](https://drive.google.com/open?id=1szGD76vJcB7aY4s-acaPf8v7i9dT0HL08-aqV04nFII)
 
+[antivirus](https://mega.nz/file/GyhkSYbD#8EgGXYCHiHZnFt1N8ADVUpoQ9E_bbdvC5q67MjIUv74)
+
+[crack](https://mega.nz/#!m6hwAYqB!5avfcY__uI7Y6b9r69mju7_LqLTh4UvtNNV5-iQkS_w)
+
 
 # CONTENIDO
 
